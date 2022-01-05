@@ -1,2 +1,2 @@
-web: gunicorn main:app
+web: gunicorn app:app
 web: bundle exec thin start -p $PORT
