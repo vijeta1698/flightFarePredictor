@@ -4,12 +4,14 @@ from prediction import predictions
 import pickle
 import sklearn
 from log import getLog,StreamHandler
+import os
 
 app = Flask(__name__)
 
 logger = getLog('flight_fare.py')
 StreamHandler(logger)
 
+port = int(os.environ.get('PORT', 33507))
 
 @app.route('/',methods = ['GET','POST'])
 def index():
@@ -93,5 +95,5 @@ def date():
 
 
 if __name__ == '__main__':
-    app.run(port=3000)
+    app.run(host='0.0.0.0', port=port, debug=False)
 
