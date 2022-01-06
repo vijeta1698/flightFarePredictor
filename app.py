@@ -63,7 +63,7 @@ def date():
                         source = obj.Source(Source)
                         dest = obj.destination(Destination)
 
-                        model = pickle.load(open("flight_fare.pkl", 'rb'))
+                        model = pickle.load("flight_fare.pkl")
                         price = model.predict([[Total_stops,
                                                     Journey_day,
                                                     Journey_month,
