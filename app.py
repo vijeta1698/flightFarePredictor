@@ -1,7 +1,7 @@
 import pandas as pd
 from flask import Flask,render_template,request
 from prediction import predictions
-import joblib
+import pickle
 import sklearn
 import os
 
@@ -77,7 +77,7 @@ def date():
                 dest = obj.destination(Destination)
                 logger.info('data from prediction fetched')
 
-                model = joblib.load(open("flight_model.pkl", 'rb'))
+                model = pickle.load(open("flight_model.pkl", 'rb'))
                 logger.info("model opened")
                 price = model.predict([[Total_stops,
                                             Journey_day,
