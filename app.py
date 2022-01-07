@@ -76,7 +76,7 @@ def date():
                 source = obj.Source(Source)
                 dest = obj.destination(Destination)
                 logger.info('data from prediction fetched')
-                model = joblib.load(open("flight_model.pkl", 'rb'))
+                model = joblib.load(open("flight_model.pickle", 'rb'))
                 logger.info("model opened")
                 price = model.predict([[Total_stops,
                                             Journey_day,
