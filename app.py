@@ -3,6 +3,7 @@ from flask import Flask,render_template,request
 from prediction import predictions
 import joblib
 import sklearn
+import os
 
 from log import getLog,StreamHandler
 
@@ -11,6 +12,7 @@ app = Flask(__name__)
 logger = getLog('flight_fare.py')
 StreamHandler(logger)
 
+port = int(os.environ.get('PORT', 33507))
 
 @app.route('/',methods = ['GET','POST'])
 def index():
