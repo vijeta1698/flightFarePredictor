@@ -78,6 +78,7 @@ def date():
                 logger.info('data from prediction fetched')
 
                 model = joblib.load(open("flight_model.pkl", 'rb'))
+                logger.info("model opened")
                 price = model.predict([[Total_stops,
                                             Journey_day,
                                             Journey_month,
@@ -103,7 +104,7 @@ def date():
                 logger.info('Predicted Price----> '+str(round(price[0],2)))
                 return render_template('home.html',price=round(price[0],2))
             except Exception as e:
-                   logger.error('Error in data inserion ' + str(e))
+                   logger.error(str(e))
     except Exception as e:
                 logger.error('Error occurred' + str(e))
 
