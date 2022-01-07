@@ -3,15 +3,14 @@ from flask import Flask,render_template,request
 from prediction import predictions
 import joblib
 import sklearn
+
 from log import getLog,StreamHandler
-import os
 
 app = Flask(__name__)
 
 logger = getLog('flight_fare.py')
 StreamHandler(logger)
 
-port = int(os.environ.get('PORT', 33507))
 
 @app.route('/',methods = ['GET','POST'])
 def index():
@@ -29,18 +28,29 @@ def date():
         if request.method == 'POST':
             try:
                 Total_stops = request.form['stops']
+                logger.info("total stops --->" +str(Total_stops))
                 Departure_date = request.form['Dep_Time']
+                logger.info("Departure --->" +str(Departure_date))
                 Arrival_Date = request.form['Arrival_Time']
+                logger.info("Arrival date --->" +str(Arrival_Date))
                 Source = request.form['Source']
+                logger.info("Source --->" +str(Source))
                 Destination = request.form['Destination']
+                logger.info("Destination --->" +str(Destination))
                 airline = request.form['airline']
-
+                logger.info("airline--->"+str(airline))
                 departure_day = int(pd.to_datetime(Departure_date,format ="%Y-%m-%dT%H:%M").day)
+                logger.info('departure_day---->'+str(departure_day))
                 departure_month = int(pd.to_datetime(Departure_date,format ="%Y-%m-%dT%H:%M").month)
+                logger.info('departure_month---->'+str(departure_month))
                 arrival_day = int(pd.to_datetime(Arrival_Date, format="%Y-%m-%dT%H:%M").day)
+                logger.info('arrival_day---->'+str(arrival_day))
                 arrival_month = int(pd.to_datetime(Arrival_Date,format ="%Y-%m-%dT%H:%M").month)
+                logger.info('arrival_month----->'+str(arrival_month))
                 departure_year = int(pd.to_datetime(Departure_date, format="%Y-%m-%dT%H:%M").year)
+                logger.info('departure_year----->'+str(departure_year))
                 arrival_year = int(pd.to_datetime(Arrival_Date,format ="%Y-%m-%dT%H:%M").year)
+                logger.info('arrival_year------>'+str(arrival_year))
                 if (arrival_day< departure_day and arrival_month==departure_month) or (arrival_month<departure_month and departure_month!= 12
                                                                                        and arrival_year<departure_year) \
                         or (departure_month!=12 and arrival_year<departure_year):
@@ -62,6 +72,7 @@ def date():
                         airline = obj.Airline(airline)
                         source = obj.Source(Source)
                         dest = obj.destination(Destination)
+                        logger.info('data from prediction fetched')
 
                         model = joblib.load(open("flight_model.pkl", 'rb'))
                         price = model.predict([[Total_stops,
@@ -92,6 +103,7 @@ def date():
                             logger.error('Error in data inserion ' + str(e))
     except Exception as e:
                 logger.error('Error occurred' + str(e))
+
 
 
 if __name__ == '__main__':
