@@ -10,9 +10,9 @@ Optimized multiple Regression models using GridsearchCV to reach the best model.
 Built a client facing API using flask
 # Codes and Resources Used
 Python Version: 3.8.5
-Packages: pandas, numpy, sklearn, matplotlib, seaborn, flask, json, pickle
-For Web Framework Requirements: pip install -r requirements.txt
-Dataset: https://www.kaggle.com/nikhilmittal/flight-fare-prediction-mh
+Packages: pandas, numpy, sklearn, matplotlib, seaborn, flask, json, pickle<br>
+For Web Framework Requirements: pip install -r requirements.txt<br>
+Dataset: https://www.kaggle.com/nikhilmittal/flight-fare-prediction-mh<br>
 # Problem Statement
 Flight ticket prices can be something hard to guess, today we might see a price, check out the price of the same flight tomorrow, it will be a different story. We might have often heard travelers saying that flight ticket prices are so unpredictable. As data scientists, we are gonna prove that given the right data anything can be predicted. Here you will be provided with prices of flight tickets for various airlines between the months of March and June of 2019 and between various cities. Size of training set: 10683 records
 
